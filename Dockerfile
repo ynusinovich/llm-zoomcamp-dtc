@@ -1,3 +1,5 @@
+# CUDA 12.1   |   Ubuntu 22.04   |   Python 3.10   |   Poetry   |   Jupyter
+
 FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -16,7 +18,7 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
         python3.10 python3.10-dev python3.10-distutils && \
     curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
 
-# Provide “python” and “python3” -> 3.10
+# Provide “python” and “python3” → 3.10
 RUN update-alternatives --install /usr/bin/python  python  /usr/bin/python3.10 1 && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
 
@@ -26,7 +28,6 @@ RUN pip install --no-cache-dir "poetry==1.8.2"
 # 4. Project deps
 WORKDIR /app
 COPY pyproject.toml poetry.lock* ./
-
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-root
 
